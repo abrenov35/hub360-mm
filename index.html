@@ -221,6 +221,17 @@
     const SCRIPT_URL = 'https://script.google.com/macros/s/REMPLACER_PAR_GAS_URL_MM/exec';
     const APP_VERSION = '2026-05-25-compact-iphone-v11';
 
+    const DEFAULT_SITES = [
+      { id: 's1', name: 'Mes taches', url: 'https://abrenov35.github.io/taches-ss', icon: 'globe', group: 'Taches' },
+      { id: 's2', name: 'AB RENOV 35', url: 'https://abrenov35.ovh/chantiers', icon: 'home', group: 'AB RENOV 35' },
+      { id: 's3', name: 'Vertuoza', url: 'https://app.vertuoza.app/?tenant_id=2749', icon: 'folder', group: 'AB RENOV 35' },
+      { id: 's4', name: 'Planning Google', url: 'https://calendar.google.com/calendar/u/1/r', icon: 'calendar', group: 'Divers' },
+      { id: 's5', name: 'Libellés devis', url: 'https://abrenov35.github.io/libelles-ab/', icon: 'chart', group: 'AB RENOV 35' },
+      { id: 's6', name: 'Nouvelle opportunité', url: 'https://abrenov35.github.io/ab-opp/', icon: 'star', group: 'AB RENOV 35' },
+      { id: 's7', name: 'Verif des devis', url: 'https://abrenov35.github.io/verif-devis-ab/', icon: 'tool', group: 'AB RENOV 35' },
+      { id: 's8', name: 'FICHE CHANTIER', url: 'https://abrenov35.github.io/docs-chantier-ab/', icon: 'folder', group: 'AB RENOV 35' },
+    ];
+
     const DEFAULT_GROUPS = ['AB RENOV 35','Divers','Finance','Loisir','Taches','Utilitaires'];
 
     const ICONS = [
@@ -238,7 +249,7 @@
     let selectedIcon = ICONS[0];
     let editId = null;
     let isEditMode = false;
-    let sitesCache = [];
+    let sitesCache = [...DEFAULT_SITES];
     let groupsCache = [...DEFAULT_GROUPS];
 
     function iconSVG(icon, size = 36) {
