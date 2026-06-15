@@ -310,6 +310,13 @@
     }
 
     async function loadFromSheet() {
+      // GAS non configuré — utiliser DEFAULT_SITES
+      if (SCRIPT_URL.includes('REMPLACER')) {
+        try { sitesCache = JSON.parse(localStorage.getItem('hub360_mm_sites')) || [...DEFAULT_SITES]; } catch { sitesCache = [...DEFAULT_SITES]; }
+        try { groupsCache = normalizeGroups(JSON.parse(localStorage.getItem('hub360_mm_groups')) || [...DEFAULT_GROUPS]); } catch { groupsCache = [...DEFAULT_GROUPS]; }
+        renderAll();
+        return;
+      }
       const r = await apiCall({ action: 'get' });
       if (r && Array.isArray(r.sites)) {
         sitesCache = r.sites.map(s => ({ ...s, url: normalizeUrl(s.url), group: cleanGroupName(s.group) }));
@@ -317,7 +324,7 @@
         localStorage.setItem('hub360_mm_sites', JSON.stringify(sitesCache));
         localStorage.setItem('hub360_mm_groups', JSON.stringify(groupsCache));
       } else {
-        try { sitesCache = JSON.parse(localStorage.getItem('hub360_mm_sites')) || []; } catch { sitesCache = []; }
+        try { sitesCache = JSON.parse(localStorage.getItem('hub360_mm_sites')) || [...DEFAULT_SITES]; } catch { sitesCache = [...DEFAULT_SITES]; }
         try { groupsCache = JSON.parse(localStorage.getItem('hub360_mm_groups')) || [...DEFAULT_GROUPS]; } catch { groupsCache = [...DEFAULT_GROUPS]; }
         groupsCache = normalizeGroups(groupsCache);
       }
