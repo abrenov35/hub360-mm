@@ -218,7 +218,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/REMPLACER_PAR_GAS_URL_MM/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbye1mtMDDmBmBRtqEKYNoBvgDdjzsEfEQgGZvOHclvfqrMv3_kmSjTk_gd9AYMUbZjf/exec';
     const APP_VERSION = '2026-05-25-compact-iphone-v11';
 
     const DEFAULT_SITES = [
@@ -310,13 +310,7 @@
     }
 
     async function loadFromSheet() {
-      // GAS non configuré — utiliser DEFAULT_SITES
-      if (SCRIPT_URL.includes('REMPLACER')) {
-        try { sitesCache = JSON.parse(localStorage.getItem('hub360_mm_sites')) || [...DEFAULT_SITES]; } catch { sitesCache = [...DEFAULT_SITES]; }
-        try { groupsCache = normalizeGroups(JSON.parse(localStorage.getItem('hub360_mm_groups')) || [...DEFAULT_GROUPS]); } catch { groupsCache = [...DEFAULT_GROUPS]; }
-        renderAll();
-        return;
-      }
+
       const r = await apiCall({ action: 'get' });
       if (r && Array.isArray(r.sites)) {
         sitesCache = r.sites.map(s => ({ ...s, url: normalizeUrl(s.url), group: cleanGroupName(s.group) }));
